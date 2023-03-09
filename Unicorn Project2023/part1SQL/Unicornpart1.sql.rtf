@@ -1,0 +1,558 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Roman;
+\f3\fmodern\fcharset0 CourierNewPSMT;\f4\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red42\green40\blue35;\red64\green170\blue255;
+\red17\green20\blue59;\red255\green255\blue255;\red42\green212\blue154;\red246\green103\blue255;\red252\green118\blue107;
+\red103\green108\blue137;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c21569\c20784\c18431;\cssrgb\c30196\c72941\c100000;
+\cssrgb\c8235\c11373\c29804;\cssrgb\c100000\c100000\c100000;\cssrgb\c15686\c85098\c66667;\cssrgb\c98039\c52157\c100000;\cssrgb\c100000\c54902\c49412;
+\cssrgb\c47843\c50196\c60784;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \'971. 
+\f1\fs32 \cf3 \strokec3 How many customers do we have in the data?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  (\cf4 \strokec4 count\cf6 \strokec6 (customer_id) )
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  "customers";
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'972. What was the city with the most profit for the company in 2015?\'a0
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  orders.Shipping_city ,\cf4 \strokec4 Sum\cf6 \strokec6 (order_profits) \cf4 \strokec4 AS\cf6 \strokec6  total_profit
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details \cf4 \strokec4 ON\cf6 \strokec6  orders.order_id \cf7 \strokec7 =\cf6 \strokec6  order_details.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Where\cf6 \strokec6  \cf4 \strokec4 EXTRACT\cf6 \strokec6  (year \cf4 \strokec4 from\cf6 \strokec6  orders.order_date) \cf7 \strokec7 =\cf6 \strokec6  \cf8 \strokec8 2015
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY orders.shipping_city
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 ORDER\cf6 \strokec6  BY total_profit \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Limit\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6  ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'973. In 2015, what was the most profitable city's profit?
+\f2\fs24 \cf0 \strokec2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  orders.shipping_city, \cf4 \strokec4 SUM\cf6 \strokec6 (order_profits) \cf4 \strokec4 AS\cf6 \strokec6  total_profit
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders\'a0
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details \cf4 \strokec4 ON\cf6 \strokec6  orders.order_id \cf7 \strokec7 =\cf6 \strokec6  order_details.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  orders.order_date \cf7 \strokec7 >=\cf6 \strokec6  \cf9 \strokec9 '2015-01-01'\cf6 \strokec6  \cf7 \strokec7 AND\cf6 \strokec6  orders.order_date \cf7 \strokec7 <\cf6 \strokec6  \cf9 \strokec9 '2016-01-01'
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY orders.shipping_city
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 ORDER\cf6 \strokec6  BY total_profit \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 LIMIT\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0
+\f2\fs24 \cf0 \strokec2 \
+\
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'974.How many different cities do we have in the data?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 Select\cf6 \strokec6  \cf4 \strokec4 count\cf6 \strokec6 ( \cf4 \strokec4 Distinct\cf6 \strokec6  shipping_city)
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 from\cf6 \strokec6  orders ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'975. Show the total spent by customers from low to high.
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \'a0 o.customer_id ,\cf4 \strokec4 sum\cf6 \strokec6 (od.order_sales) \cf4 \strokec4 AS\cf6 \strokec6  order_total
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 From\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od\'a0 \cf4 \strokec4 ON\cf6 \strokec6  o.order_id \cf7 \strokec7 =\cf6 \strokec6  od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  BY o.customer_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 ORDER\cf6 \strokec6  BY order_total \cf4 \strokec4 ASC
+\f2\fs24 \cf0 \strokec2 \
+\
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'976. What is the most profitable city in the State of Tennessee?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6 \'a0 o.shipping_city , \cf4 \strokec4 sum\cf6 \strokec6 (od.order_profits) \cf4 \strokec4 AS\cf6 \strokec6  total_profit
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 From\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od \cf4 \strokec4 ON\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  o.shipping_state \cf7 \strokec7 =\cf9 \strokec9 'Tennessee'
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  BY o.shipping_city
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 ORDER\cf6 \strokec6  BY Total_profit \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 LIMIT\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6  ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'977. What\'92s the average annual profit for that city across all years?
+\f2\fs24 \cf0 \strokec2 \
+\
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6 \'a0 \cf4 \strokec4 AVG\cf6 \strokec6  (od.order_profits) \cf4 \strokec4 AS\cf6 \strokec6  avg_profit , \cf4 \strokec4 EXTRACT\cf6 \strokec6  (year \cf4 \strokec4 from\cf6 \strokec6  o.order_date) \cf4 \strokec4 AS\cf6 \strokec6  order_year
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od \cf4 \strokec4 ON\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  o.shipping_city\cf7 \strokec7 =\cf6 \strokec6  \cf9 \strokec9 'Lebanon'
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY order_year;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'978. What is the distribution of customer types in the data?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6 \'a0 Customer_segment ,\cf4 \strokec4 Count\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  num_customer
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  Customers
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by Customer_segment ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'979. What\'92s the most profitable product category on average in Iowa across all years?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \'a0 p.product_category , \cf4 \strokec4 AVG\cf6 \strokec6  (od.order_profits) \cf4 \strokec4 AS\cf6 \strokec6  most_profit
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od \cf4 \strokec4 on\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  product p \cf4 \strokec4 ON\cf6 \strokec6  p.product_id\cf7 \strokec7 =\cf6 \strokec6 od.product_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  o.shipping_state\cf7 \strokec7 =\cf9 \strokec9 'Iowa'
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by product_category
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 order\cf6 \strokec6  by\'a0 most_profit \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Limit\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0\'9710. What is the most popular product in that category across all states in 2016?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  p.product_name ,\cf4 \strokec4 SUM\cf6 \strokec6 (od.quantity) \cf4 \strokec4 AS\cf6 \strokec6  most_popular
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od \cf4 \strokec4 on\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  product p \cf4 \strokec4 ON\cf6 \strokec6  p.product_id\cf7 \strokec7 =\cf6 \strokec6 od.product_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  p.product_category\cf7 \strokec7 =\cf9 \strokec9 'Furniture'\cf6 \strokec6  \cf7 \strokec7 and\cf6 \strokec6  o.order_date \cf7 \strokec7 >=\cf6 \strokec6  \cf9 \strokec9 '2016-01-01'\cf6 \strokec6  \cf7 \strokec7 AND\cf6 \strokec6  o.order_date \cf7 \strokec7 <\cf6 \strokec6  \cf9 \strokec9 '2017-01-01'
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by p.product_name
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 order\cf6 \strokec6  by\'a0 most_popular \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Limit\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'9711. Which customer got the most discount in the data? (in total amount)
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  o.customer_id ,\cf4 \strokec4 SUM\cf6 \strokec6 (od.order_discount) \cf4 \strokec4 AS\cf6 \strokec6  most_discount
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 JOIN\cf6 \strokec6  order_details od \cf4 \strokec4 ON\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf10 \strokec10 --JOIN Customer c ON o.customer_id=c.customer_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf10 \strokec10 --WHERE p.product_category='Furniture' and o.order_date >= '2016-01-01' AND o.order_date < '2017-01-01'
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  By o.customer_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Order\cf6 \strokec6  by\'a0 most_discount \cf4 \strokec4 DESC
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Limit\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'9712. How widely did monthly profits vary in 2018?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \'a0 \cf4 \strokec4 EXTRACT\cf6 \strokec6 (month \cf4 \strokec4 from\cf6 \strokec6  o.order_date) \cf4 \strokec4 AS\cf6 \strokec6  month ,
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 sum\cf6 \strokec6 (od.order_profits) \cf4 \strokec4 AS\cf6 \strokec6  monthly_profit
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 join\cf6 \strokec6  order_details od \cf4 \strokec4 ON\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Where\cf6 \strokec6  \cf4 \strokec4 EXTRACT\cf6 \strokec6  (YEAR \cf4 \strokec4 from\cf6 \strokec6  o.order_date)\cf7 \strokec7 =\cf8 \strokec8 2018
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by month
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 order\cf6 \strokec6  by monthly_profit ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'9713. Which order was the highest in 2015?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6 \'a0 od.order_id ,\cf4 \strokec4 sum\cf6 \strokec6 (od.order_sales) \cf4 \strokec4 as\cf6 \strokec6  total_sale
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 From\cf6 \strokec6  order_details od
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 join\cf6 \strokec6  orders o \cf4 \strokec4 on\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Where\cf6 \strokec6  \cf4 \strokec4 extract\cf6 \strokec6  (year \cf4 \strokec4 from\cf6 \strokec6  o.order_date )\cf7 \strokec7 =\cf8 \strokec8 2015
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by od.order_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 order\cf6 \strokec6  by total_sale \cf4 \strokec4 DESC\cf6 \strokec6  ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'9714.What was the rank of each city in the East region in 2015?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  Shipping_city ,\cf4 \strokec4 sum\cf6 \strokec6 (order_profits) \cf4 \strokec4 as\cf6 \strokec6  total_prof,
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Rank\cf6 \strokec6  () over (\cf4 \strokec4 order\cf6 \strokec6  by \cf4 \strokec4 sum\cf6 \strokec6 (order_profits) \cf4 \strokec4 DESC\cf6 \strokec6 ) \cf4 \strokec4 as\cf6 \strokec6  city_rank
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  orders o
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 Join\cf6 \strokec6  order_details od \cf4 \strokec4 ON\cf6 \strokec6  o.order_id\cf7 \strokec7 =\cf6 \strokec6 od.order_id
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  \cf4 \strokec4 EXTRACT\cf6 \strokec6  (year \cf4 \strokec4 from\cf6 \strokec6  o.order_date )\cf7 \strokec7 =\cf8 \strokec8 2015
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf7 \strokec7 AND\cf6 \strokec6  shipping_state \cf7 \strokec7 IN\cf6 \strokec6  (\cf9 \strokec9 'Maine'\cf6 \strokec6  ,\cf9 \strokec9 'Maine'\cf6 \strokec6 ,\cf9 \strokec9 'New Hampshire'\cf6 \strokec6 ,\cf9 \strokec9 'Massachusetts'\cf6 \strokec6 ,\cf9 \strokec9 'Rhode Island'\cf6 \strokec6 ,
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf9 \strokec9 'Connecticut'\cf6 \strokec6 ,\cf9 \strokec9 'New York'\cf6 \strokec6 , \cf9 \strokec9 'Pennsylvania'\cf6 \strokec6 , \cf9 \strokec9 'New Jersey'\cf6 \strokec6 , \cf9 \strokec9 'Delaware'\cf6 \strokec6 , \cf9 \strokec9 'Maryland'\cf6 \strokec6 ,
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf9 \strokec9 'District of Columbia'\cf6 \strokec6 , \cf9 \strokec9 'Virginia'\cf6 \strokec6 , \cf9 \strokec9 'West Virginia'\cf6 \strokec6 , \cf9 \strokec9 'North Carolina'\cf6 \strokec6 , \cf9 \strokec9 'South Carolina'\cf6 \strokec6 , \cf9 \strokec9 'Georgia'\cf6 \strokec6 , \cf9 \strokec9 'Florida'
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf6 \strokec6 )
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 Group\cf6 \strokec6  by o.shipping_city
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 order\cf6 \strokec6  by city_rank ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'9715. Display customer names for customers who are in the segment \'91Consumer\'92 or \'91Corporate.\'92 How many customers are there in total ?
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  customer_name
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  customers
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  customer_segment \cf7 \strokec7 IN\cf6 \strokec6  (\cf9 \strokec9 'Consumer'\cf6 \strokec6 , \cf9 \strokec9 'Corporate'\cf6 \strokec6 );
+\f2\fs24 \cf0 \strokec2 \
+\
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 )
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  customers
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  customer_segment \cf7 \strokec7 IN\cf6 \strokec6  (\cf9 \strokec9 'Consumer'\cf6 \strokec6 , \cf9 \strokec9 'Corporate'\cf6 \strokec6 );
+\f2\fs24 \cf0 \strokec2 \
+\
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0\'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'9716.Calculate the difference between the largest and smallest order quantities for product id \'91100.
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 MAX\cf6 \strokec6 (quantity) \cf7 \strokec7 -\cf6 \strokec6  \cf4 \strokec4 MIN\cf6 \strokec6 (quantity) \cf4 \strokec4 AS\cf6 \strokec6  diff
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  order_details
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 WHERE\cf6 \strokec6  product_id \cf7 \strokec7 =\cf6 \strokec6  \cf9 \strokec9 '100'\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'9717. Calculate the percent of products that are within the category \'91Furniture.\'92
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  total_products,
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf6 \strokec6 \'a0\'a0\'a0\'a0\'a0\'a0\cf4 \strokec4 SUM\cf6 \strokec6 (\cf4 \strokec4 CASE\cf6 \strokec6  \cf4 \strokec4 WHEN\cf6 \strokec6  product_category \cf7 \strokec7 =\cf6 \strokec6  \cf9 \strokec9 'Furniture'\cf6 \strokec6  \cf4 \strokec4 THEN\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6  \cf4 \strokec4 ELSE\cf6 \strokec6  \cf8 \strokec8 0\cf6 \strokec6  \cf4 \strokec4 END\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  furniture_products,
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf6 \strokec6 \'a0\'a0\'a0\'a0\'a0\'a0\cf4 \strokec4 ROUND\cf6 \strokec6 ((\cf4 \strokec4 SUM\cf6 \strokec6 (\cf4 \strokec4 CASE\cf6 \strokec6  \cf4 \strokec4 WHEN\cf6 \strokec6  product_category \cf7 \strokec7 =\cf6 \strokec6  \cf9 \strokec9 'Furniture'\cf6 \strokec6  \cf4 \strokec4 THEN\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6  \cf4 \strokec4 ELSE\cf6 \strokec6  \cf8 \strokec8 0\cf6 \strokec6  \cf4 \strokec4 END\cf6 \strokec6 ) \cf7 \strokec7 /\cf6 \strokec6  \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 )) \cf7 \strokec7 *\cf6 \strokec6  \cf8 \strokec8 100\cf6 \strokec6 , \cf8 \strokec8 2\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  percent_furniture
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  product;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0\'9718.Display the number of duplicate products based on their product manufacturer.\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'97Example: A product with an identical product manufacturer can be considered a duplicate.
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  product_manufacturer, \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  num_duplicates
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  product
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY product_manufacturer
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 HAVING\cf6 \strokec6  \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 ) \cf7 \strokec7 >\cf6 \strokec6  \cf8 \strokec8 1\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \cb1 \strokec3 \'a0\'a0\'a0\'a0\'a0
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'9719.Show the product_subcategory and the total number of products in the subcategory.
+\f2\fs24 \cf0 \strokec2 \
+
+\f1\fs32 \cf3 \strokec3 \'97Show the order from 
+\f4\i most
+\f1\i0  to 
+\f4\i least
+\f1\i0  products and then by product_subcategory name ascending.
+\f2\fs24 \cf0 \strokec2 \
+\
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  product_subcategory, \cf4 \strokec4 COUNT\cf6 \strokec6 (\cf7 \strokec7 *\cf6 \strokec6 ) \cf4 \strokec4 AS\cf6 \strokec6  total_products
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  product
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY product_subcategory
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 ORDER\cf6 \strokec6  BY total_products \cf4 \strokec4 DESC\cf6 \strokec6 , product_subcategory \cf4 \strokec4 ASC\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\
+\pard\tx3368\pardeftab720\li960\fi-960\sa160\partightenfactor0
+
+\f1\fs32 \cf3 \strokec3 \'9720.Show the product_id(s), the sum of quantities, where the total sum of its product quantities is greater than or equal to 100
+\f2\fs24 \cf0 \strokec2 \
+\pard\pardeftab720\li960\fi-960\partightenfactor0
+
+\f3\fs26\fsmilli13333 \cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  product_id, \cf4 \strokec4 SUM\cf6 \strokec6 (quantity) \cf4 \strokec4 AS\cf6 \strokec6  total_quantity
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 FROM\cf6 \strokec6  order_details
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 GROUP\cf6 \strokec6  BY product_id
+\f2\fs24 \cf0 \strokec2 \
+
+\f3\fs26\fsmilli13333 \cf4 \strokec4 HAVING\cf6 \strokec6  \cf4 \strokec4 SUM\cf6 \strokec6 (quantity) \cf7 \strokec7 >=\cf6 \strokec6  \cf8 \strokec8 100\cf6 \strokec6 ;
+\f2\fs24 \cf0 \strokec2 \
+\
+\pard\pardeftab720\li960\fi-960\sa160\partightenfactor0
+\cf0 \cb1 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\
+}
